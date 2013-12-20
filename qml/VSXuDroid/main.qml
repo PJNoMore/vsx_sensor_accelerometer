@@ -7,10 +7,11 @@ Rectangle {
     objectName: "accrect"
     Text {
         objectName: "accreadinglabel"
-        text: qsTr("x: y: z:")
+        text: accelerometerBackend.moduleName + accelerometerBackend.readingString
         anchors.centerIn: parent
 
         VSXuAccelerometer {
+            id: accelerometerBackend
 
         }
     }

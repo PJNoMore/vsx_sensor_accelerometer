@@ -8,7 +8,7 @@ VSXuAccelerometer::VSXuAccelerometer(QObject *parent) :
 {
     qDebug()<<"Initialized VSXuAccelerometer Module...";
 
-    connect(this, SIGNAL( readingChanged() ), this, SLOT( updateReading() ) );
+    connect(this, SIGNAL( readingChanged() ), this, SIGNAL(readingStringChanged()) );
 
     //start taking the reading
     start();
@@ -27,7 +27,8 @@ void VSXuAccelerometer::setModuleName(const QString &name)
     }
 }
 
-void VSXuAccelerometer::updateReading()
+QString VSXuAccelerometer::readingString() const
 {
-    qDebug()<< "Do something here";
+    QAccelerometerReading* result = this->reading();
+    return QString("(x,y,z) = (%1, %2, %3)").arg(result->x()).arg(result->y()).arg(result->z());
 }
