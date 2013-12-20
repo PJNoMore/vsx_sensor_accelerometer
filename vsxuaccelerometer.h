@@ -8,7 +8,7 @@ class VSXuAccelerometer : public QAccelerometer
     Q_OBJECT
 
     Q_PROPERTY(QString moduleName READ moduleName WRITE setModuleName NOTIFY moduleNameChanged)
-    Q_PROPERTY(QString readingString READ readingString NOTIFY readingStringChanged CONSTANT)
+    Q_PROPERTY(QString readingString READ readingString NOTIFY readingStringChanged)
 public:
     explicit VSXuAccelerometer(QObject *parent = 0);
 
