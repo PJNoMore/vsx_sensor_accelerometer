@@ -1,26 +1,33 @@
 #include "vsxuaccelerometer.h"
 
-VSXuAccelerometer::VSXuAccelerometer(QDeclarativeItem *parent) :
-    QDeclarativeItem(parent)
+#include <QDebug>
+
+VSXuAccelerometer::VSXuAccelerometer(QObject *parent) :
+    QAccelerometer(parent),
+    m_moduleName("PJ's Module")
 {
-      qDebug("vsxuaccelerometer init");
+    qDebug()<<"Initialized VSXuAccelerometer Module...";
+
+    connect(this, SIGNAL( readingChanged() ), this, SLOT( updateReading() ) );
+
+    //start taking the reading
+    start();
 }
 
-VSXuAccelerometer::~VSXuAccelerometer()
+QString VSXuAccelerometer::moduleName() const
 {
-
+    return m_moduleName;
 }
 
-const QVector3D VSXuAccelerometer::getXYZ()
+void VSXuAccelerometer::setModuleName(const QString &name)
 {
-    return m_xyz;
-}
-
-void VSXuAccelerometer::setXYZ(const QVector3D xyz)
-{
-    if(xyz != m_xyz)
-    {
-        m_xyz = xyz;
-        emit xyzChanged(m_xyz);
+    if(m_moduleName != name){
+        m_moduleName = name;
+        emit moduleNameChanged();
     }
+}
+
+void VSXuAccelerometer::updateReading()
+{
+    qDebug()<< "Do something here";
 }

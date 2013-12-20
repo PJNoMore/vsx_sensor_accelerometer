@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import VSXuAccelerometer 1.0
+import org.vovoid.vsxu 1.0
 
 Rectangle {
     width: 360

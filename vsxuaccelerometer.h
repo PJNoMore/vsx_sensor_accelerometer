@@ -1,27 +1,27 @@
 #ifndef VSXUACCELEROMETER_H
 #define VSXUACCELEROMETER_H
 
-#include <QtDeclarative/QDeclarativeItem>
-#include <QVector3D>
+#include <QAccelerometer>
 
-class VSXuAccelerometer : public QDeclarativeItem
+class VSXuAccelerometer : public QAccelerometer
 {
-    Q_PROPERTY(QVector3D reading READ getXYZ WRITE setXYZ NOTIFY xyzChanged)
     Q_OBJECT
+
+    Q_PROPERTY(QString moduleName READ moduleName WRITE setModuleName NOTIFY moduleNameChanged)
 public:
-    explicit VSXuAccelerometer(QDeclarativeItem *parent = 0);
-    ~VSXuAccelerometer();
+    explicit VSXuAccelerometer(QObject *parent = 0);
 
-    const QVector3D getXYZ();
-
-    void setXYZ(const QVector3D);
-
+    QString moduleName() const;
+    void setModuleName(const QString& name);
 
 signals:
-    void xyzChanged(QVector3D);
+    void moduleNameChanged();
+
+public slots:
+    void updateReading();
 
 private:
-    QVector3D m_xyz;
+    QString m_moduleName;
 };
 
 #endif // VSXUACCELEROMETER_H
